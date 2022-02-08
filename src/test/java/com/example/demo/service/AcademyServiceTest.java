@@ -7,22 +7,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import com.example.demo.model.Academy;
 import com.example.demo.model.Subject;
 import com.example.demo.repository.AcademyRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @SpringBootTest
+@Slf4j
 public class AcademyServiceTest {
 
 	@Autowired
@@ -31,13 +30,15 @@ public class AcademyServiceTest {
 	@Autowired
 	private AcademyService academyService;
 	
-	@After
+	@AfterEach
 	public void cleanAll() {
-		//academyRepository.deleteAll();
+		log.info(">>>>>>>>>>[Starting AcademyServiceTest::cleanAll]<<<<<<<<<<");
+		academyRepository.deleteAll();
 	}
 	
-	@Before
+	@BeforeEach
 	public void setup() {
+		log.info(">>>>>>>>>>[Starting AcademyServiceTest::setup]<<<<<<<<<<");
 		List<Academy> academies = new ArrayList<>();
 		
 		for(int i=0;i<10;i++) {
@@ -56,26 +57,8 @@ public class AcademyServiceTest {
 	}
 
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void AcademySubjectN1() throws Exception {
-        
-//		List<Academy> academies = new ArrayList<>();
-//		
-//		for(int i=0;i<10;i++) {
-//			Academy academy = Academy.builder()
-//									 .name("강남스쿨"+i)
-//									 .build();
-//			
-//			academy.addSubject(Subject.builder()
-//									  .name("자바웹개발"+i)
-//									  .build());
-//			academies.add(academy);
-//		}
-//		
-//		academyRepository.saveAll(academies);
-		
-		
 		
 		List<String> subjectNames = academyService.findAllSubjectNames();
 		
