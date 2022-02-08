@@ -22,8 +22,18 @@ public class AcademyService {
 	
 	@Transactional(readOnly = true)
 	public List<String> findAllSubjectNames(){
-		log.info(">>>>>>>>>>[Starting AcademyRepository::findAllSubjectNames]<<<<<<<<<<");
+		return extractSubjectNames(academyRepository.findAll());	
+	}
+
+	
+	@Transactional(readOnly = true)
+	public List<String> findAllSubjectNamesByJoinFetch(){
 		return extractSubjectNames(academyRepository.findAllJoinFetch());	
+	}
+
+	@Transactional(readOnly = true)
+	public List<String> findAllSubjectNamesByEntityGraph(){
+		return extractSubjectNames(academyRepository.findAllEntityGraph());	
 	}
 	
 	private List<String> extractSubjectNames(List<Academy> academies){

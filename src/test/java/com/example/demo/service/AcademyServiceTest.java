@@ -19,9 +19,8 @@ import com.example.demo.repository.AcademyRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
-
-@SpringBootTest
 @Slf4j
+@SpringBootTest
 public class AcademyServiceTest {
 
 	@Autowired
