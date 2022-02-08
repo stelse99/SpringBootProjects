@@ -23,7 +23,7 @@ public class AcademyService {
 	@Transactional(readOnly = true)
 	public List<String> findAllSubjectNames(){
 		log.info(">>>>>>>>>>[Starting AcademyRepository::findAllSubjectNames]<<<<<<<<<<");
-		return extractSubjectNames(academyRepository.findAll());	
+		return extractSubjectNames(academyRepository.findAllJoinFetch());	
 	}
 	
 	private List<String> extractSubjectNames(List<Academy> academies){
