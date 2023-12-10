@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  mysqldb:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mydb
+    ports:
+      - "3336:3306"
+    volumes: 
+      - ./Desktop/db:/var/lib/mysql mysql
+    restart: always       
+
+  app:
+    image: stelse99/app:latest
+    environment:
+      - MYSQL_HOST=mysqldb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_PORT=3306
+    ports:
+      - "9090:8080"
+    depends_on:
+      - mysqldb
+    restart: always
+    
